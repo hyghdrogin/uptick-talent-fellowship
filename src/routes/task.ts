@@ -1,7 +1,6 @@
 import { Router } from "express";
-import TaskController from "../controllers/task.js";
 
-const { createTask, readTask, readAllTasks, updateTask, deleteTask } = TaskController;
+import { createTask, readTask, readAllTasks, updateTask, deleteTask } from "../controllers";
 
 const router = Router();
 

@@ -1,11 +1,11 @@
 {
-  "name": "uptick-week1-task",
+  "name": "uptick-talent-fellowship",
   "version": "1.0.0",
-  "description": "Uptick Fellowship Week 1 Task",
+  "description": "Uptick Fellowship Week Two Task",
   "main": "app.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "node dist/server.js",
     "dev": "tsc-watch -b --onSuccess \"npm run start\"",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
@@ -13,26 +13,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hyghdrogin/uptick-week1-task.git"
+    "url": "git+https://github.com/hyghdrogin/uptick-talent-fellowship.git"
   },
   "author": "Emmanuel Anu Omopariola",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hyghdrogin/uptick-week1-task/issues"
+    "url": "https://github.com/hyghdrogin/uptick-talent-fellowship/issues"
   },
-  "homepage": "https://github.com/hyghdrogin/uptick-week1-task#readme",
+  "homepage": "https://github.com/hyghdrogin/uptick-talent-fellowship#readme",
   "dependencies": {
-    "@prisma/client": "^5.3.1",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "joi": "^17.10.2",
-    "prisma": "^5.3.1"
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "socket.io-parser": "^4.2.4"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.14",
-    "@types/express": "^4.17.17",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
     "eslint": "^8.49.0",

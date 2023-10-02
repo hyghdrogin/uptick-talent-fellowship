@@ -1,0 +1,42 @@
+{
+  "name": "week-two",
+  "version": "1.0.0",
+  "description": "Week One Task",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "tsc-watch -b --onSuccess \"npm run start\"",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyghdrogin/uptick-talent-fellowship.git"
+  },
+  "author": "Emmanuel Omopariola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyghdrogin/uptick-talent-fellowship/issues"
+  },
+  "homepage": "https://github.com/hyghdrogin/uptick-talent-fellowship#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.3.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.10.2",
+    "prisma": "^5.3.1"
+  }
+}

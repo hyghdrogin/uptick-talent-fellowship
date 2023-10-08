@@ -7,6 +7,7 @@ const useWebSocket = (url: string) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    console.log(url)
     const ws = new WebSocket(url);
 
     ws.onopen = () => {
@@ -45,7 +46,7 @@ const useWebSocket = (url: string) => {
 };
 
 const App: React.FC = () => {
-  const { socket, messages, message, setMessage, sendMessage } = useWebSocket('wss://chat-0jf3.onrender.com');
+  const { socket, messages, message, setMessage, sendMessage } = useWebSocket(process.env.REACT_APP_WSS  as string);
 
   return (
     <div className="App">

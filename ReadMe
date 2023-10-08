@@ -1,0 +1,10 @@
+# Upticks Talent Fellowship Chat App
+This repo is for Uptick Talent Fellowship Week Three Task
+
+## Documentation
+- The frontend is hosted on AWS, click [here](https://week-three.dsatdzs3ew11s.amplifyapp.com/).
+- The backend is hosted on render.
+
+- Whenever More than One user accesses the frontend link, any message sent from any of the user can be seen by other users.
+- Testing this, I opened the link on various chrome windows and got the messages.
+

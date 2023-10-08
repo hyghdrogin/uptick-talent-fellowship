@@ -5,7 +5,6 @@ import { response } from "../utils";
 export const initMessageSocket = async (socket: Socket) => {
 	try {
 		socket.on("connection", () => {
-			// Assuming you will receive the user data as a JSON string during connection
 			const user = JSON.parse(socket.handshake.query);
 
 			socket.on("sendMessage", async (message) => {
@@ -29,7 +28,6 @@ export const initMessageSocket = async (socket: Socket) => {
 
 					socket.emit("messageSent", newMessage);
 
-					// Broadcast the new message to all connected sockets in the chat room
 					socket.to(newMessage.chatRoomId!.toString()).emit("newMessage", newMessage);
 				} catch (error: unknown) {
 					return response.errorMessage(socket, 409, "Error creating message: " + (error as Error).message);
@@ -38,6 +36,5 @@ export const initMessageSocket = async (socket: Socket) => {
 		});
 	} catch (error: unknown) {
 		console.error("WebSocket error:", error);
-		// Handle errors specific to WebSocket
 	}
 };

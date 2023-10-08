@@ -2,7 +2,9 @@ import express from "express";
 import http from "http";
 import WebSocket from "ws";
 import cors from "cors";
+import "dotenv/config";
 
+const port = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
@@ -26,6 +28,6 @@ wss.on("connection", (ws) => {
 	});
 });
 
-server.listen(8080, () => {
-	console.log("Server started on port 8080");
+server.listen(port, () => {
+	console.log(`Server started on port ${port}`);
 });

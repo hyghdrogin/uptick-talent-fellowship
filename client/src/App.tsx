@@ -34,7 +34,7 @@ const useWebSocket = (url: string) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       if (message.trim() !== '') {
         socket.send(message);
-        setMessage('');  // Clear the message after sending
+        setMessage('');
       }
     } else {
       console.error('WebSocket is not open. Cannot send message.');
@@ -45,7 +45,7 @@ const useWebSocket = (url: string) => {
 };
 
 const App: React.FC = () => {
-  const { socket, messages, message, setMessage, sendMessage } = useWebSocket('ws://localhost:8080');
+  const { socket, messages, message, setMessage, sendMessage } = useWebSocket('wss://chat-0jf3.onrender.com');
 
   return (
     <div className="App">

@@ -1,51 +1,47 @@
-import { createServer } from "http";
-import { Server } from "socket.io";
+/* eslint-disable @typescript-eslint/no-namespace */
+import express, { Request, Response, Router } from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import { GeneralRequest } from "./utils";
+import http from "http";
+import path from "path";
+import { setupWebSocket } from "./websocket";
 
-const server = createServer();
-const io: Server = new Server(server);
+declare global {
+	namespace Express {
+	interface Request extends GeneralRequest {}
+	}
+}
 
-const chatRooms = new Map<string, Set<string>>();
-
-io.on("connection", (socket) => {
-	const joinRoom = (room: string) => {
-		socket.join(room);
-		if (!chatRooms.has(room)) {
-			chatRooms.set(room, new Set());
-		}
-    chatRooms.get(room)!.add(socket.id);
-	};
-
-	socket.on("message", (data) => {
-		const { room, message } = data;
-
-		if (room) {
-			joinRoom(room);
-		}
-
-		const chatRoom = chatRooms.get(room || "default");
-		if (chatRoom !== undefined) {
-			const chatRoomArray = Array.from(chatRoom);
-			io.to(chatRoomArray).emit("message", {
-				user: socket.id,
-				message,
-			});
-		}
+export const server = (
+	port: string | number,
+	router: Router,
+	baseUrl = "/"
+) => {
+	const app = express();
+  
+	app.use(cors());
+	app.use(bodyParser.json({ limit: "50mb" }));
+	app.use(express.json({ limit: "50mb" }));
+	app.use(express.urlencoded({ extended: false, limit: "50mb" }));
+	app.use(express.static(path.join(__dirname, "../public")));
+  
+	app.get(baseUrl, (req: Request, res: Response) => {
+		res.clearCookie("username", { httpOnly: true });
+		res.sendFile(path.join(__dirname, "../public", "index.html"));
 	});
-
-	socket.on("disconnect", () => {
-		const room = [...socket.rooms][1]; 
-		if (room) {
-			const chatRoom = chatRooms.get(room);
-			if (chatRoom) {
-				chatRoom.delete(socket.id);
-				if (chatRoom.size === 0) {
-					chatRooms.delete(room);
-				}
-			}
-		}
+  
+	app.use(baseUrl, router);
+  
+	app.use((req: Request, res: Response) => {
+		res.sendFile(path.join(__dirname, "../public", "404.html"));
 	});
-});
-
-server.listen(3000, () => {
-	console.log("Server is running on port 3000");
-});
+  
+	const httpServer = http.createServer(app);
+	setupWebSocket(httpServer);
+  
+	httpServer.listen(port, async () => {
+		console.info(`Listening on port ${port}`);
+	});
+};
+  
